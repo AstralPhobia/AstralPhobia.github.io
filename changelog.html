@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Celeste - Changelog - v1.4.0.0</title>
+
+        <meta property="og:title" content="Celeste" />
+        <meta property="og:site_name" content="Celeste" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://celestegame.com/" />
+        <meta property="og:image" content="http://celestegame.com/images/1.4.0.0.png" />
+        <meta property="og:description" content="Celeste v1.4.0.0 Changelog">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@noelfb">
+        <meta name="twitter:creator" content="@noelfb">
+        <meta name="twitter:title" content="Celeste">
+        <meta name="twitter:description" content="Celeste v1.4.0.0 Changelog">
+        <meta name="twitter:image" content="http://celestegame.com/images/1.4.0.0.png">
+
+        <meta name="description" content="Celeste v1.4.0.0 Changelog">
+        <meta name="keywords" content="celeste,game,indie,towerfall,pico-8,pico,matt,thorson,noel,berry,studio,miniboss">
+
+        <link rel="icon" href="images/ico.png">
+        <link rel="shortcut icon" href="images/ico.png" type="image/x-icon">
+
+        <style>
+            html, body { margin: 0; padding: 0; background: #eee; font-family: Arial, Helvetica, sans-serif; color: #111; line-height: 1.4em; }
+            h1 { font-size: 2em; padding: 0 0 20px 0; margin: 0; border-bottom: 8px solid #ccc; }
+            h2 { font-size: 1.4em; text-transform: uppercase; color: #666; font-weight: bold; margin: 20px 0 0 0; padding: 0; }
+            h3 { font-size: 1.1em; color: #333; font-weight: bold; margin: 0; padding: 0; margin-top: 10px;}
+            ul { margin: 6px 0 0 40px; padding: 0; }
+            spoiler { background: #000; color: #000; }
+            spoiler.disabled { background: #fff; color: #000; }
+            .toggle { position: fixed; top: 10px; left: 10px; background: #111; float: left; padding: 6px 10px 6px 10px; color: #fff; border-radius: 4px; text-transform: uppercase; font-weight: bold; font-size: 0.9em; cursor:pointer;user-select: none; }
+            .toggle:hover { color: #ff4400; }
+        </style>
+
+        <script>
+        var toggled = false;
+        function toggleSpoilers()
+        {
+            toggled = !toggled;
+            var spoilers = document.body.getElementsByTagName("spoiler");
+            
+            for (var i = 0; i < spoilers.length; i++)
+                if (toggled)
+                    spoilers[i].classList.add("disabled");
+                else
+                    spoilers[i].classList.remove("disabled");
+
+        }
+        </script>
+
+    </head>
+
+    <body>
+
+
+        <div style="margin: 0px auto; padding: 0 20px 0 20px; width: 650px; margin-top: 40px;">
+			<center><img src="images/wingedberry.png" alt="Winged Strawberry" style="width: 200px;"/></center>
+			
+            <h1>V1.4.0.0</h1>
+            <h2>New Options:</h2>
+            <ul>
+                <li>Added an additional 'Screenshake' setting: 50%, which is now the default</li>
+                <li>Added the 'Grab Mode' option, which allows you to use the grab button as a toggle rather than holding it</li>
+            </ul>
+            
+            <h2>Control Rebinding:</h2>
+            <ul>
+                <li>Overhauled the control rebinding system, to allow for much more granular and complete rebinding, including menu inputs and more</li>
+                <li>Added a bind for Advanced: Crouch Dash</li>
+                <li>After a 'Crouch Dash' bind is set, a 'Crouch Dash Mode' option will appear. 'Press' mode crouch dashes when the button is pressed. 'Hold' mode crouch dashes when the button is held and a regular dash button is pressed</li>
+                <li>Added binds for Advanced: Directionals for movement- or dashing-only</li>
+                <li>The option to reset all controls to defaults must now be held to confirm</li>
+                <li>Removed the hard-coded Quick Restart shortcut on gamepads (L + R + Start), because it can now conflict with custom rebinds. You can bind a dedicated Quick Restart button to use this feature</li>
+                <li>Control rebinds will be reset to default when you download this update</li>
+            </ul>
+            
+            <h2>Pause Buffering:</h2>
+            <ul>
+                <li>Added 0.1s of input buffering on the Pause input</li>
+                <li>Fixed game timer freezing during unpause (this adds 0.15s IGT to each unpause compared to before)</li>
+            </ul>
+            
+            <h2>Physics and Gameplay Changes:</h2>
+            <ul>
+                <li>Madeline now uses the ducking sprite when crouch dashing</li>
+                <li>Moved the bottom screen kill zone down 4px</li>
+                <li>Fixed a bug where wall jumps from the right side of walls could sometimes not gain the momentum of the wall</li>
+                <li>Fixed MoveBlocks giving inconsistent momentum when moving vertically and being steered horizontally</li>
+                <li>Added a grace period of 0.01s for gaining horizontal boosts off of explosions by holding the direction you will be sent in at the moment of impact. Examples of explosions are bumpers, puffer fish, and respawning seekers. 0.01s is a single frame at 100% game speed, but because explosion impacts freeze the game for 0.1s, this is effectively a 0.1s grace period.</li>
+                <li>Dash corner correction no longer applies if the corner has spikes on top of it</li>
+                <li>Dash jump-thru correction no longer applies if the jump-thru has spikes on top of it</li>
+                <li>Dash correction checks now use the hurtbox rather than the physicsbox</li>
+                <li>Dashes no longer correct below to ground with spikes</li>
+                <li>Fixed squish correction putting Madeline in the ducking state while climbing</li>
+                <li>Increased Madeline's maximum vertical squish wiggle distance so that all previously-survivable crush scenarios should still be survivable, despite the previous fix</li>
+                <li>Fixed squish correction not applying when pushed by fast-moving blocks</li>
+            </ul>
+            
+            <h2>Chapter 9 Level Changes:</h2>
+            <ul>
+                <li>Added a spike to Singular 11</li>
+                <li>Added cracked tiles and indicators to Power Source Hub</li>
+                <li>Added spikes to Power Source 4th Key</li>
+                <li>Added a spike to Event Horizon 9</li>
+                <li>Restructured Determination 8</li>
+                <li>Shifted spikes and electricity, added a refill in Reconciliation 8</li>
+            </ul>
+            
+            <h2>Minor Changes:</h2>
+            <ul>
+                <li>Made Ch3 Master Suite Oshiro idle conversation skippable</li>
+                <li>Keyboard icons will be used instead of Controller icons, if the keyboard was the last device used</li>
+                <li>Reduced High Resolution art asset sizes, as the game doesn't actually draw them at their full resolution. This greatly reduces asset size</li>
+                <li>Removed old Binary save file format from when the game first released</li>
+                <li>Added some visual hints to the Chapter 4 Heart</li>
+                <li>Updated to the latest version of FNA, introducing FNA3D. This means the FNA version can run DirectX on Windows and Metal on Mac</li>
+                <li>Changed the depth of the Chapter 4 white block to be behind Madeline when she enters the room</li>
+                <li>Added '--graphics [DRIVER]' and '--disable-lateswaptear' to FNA command-line arguments, which corresponds with FNA3D_FORCE_DRIVER and FNA3D_DISABLE_LATESWAPTEAR respectively</li>
+                <li>Some minor changes to 3B</li>
+                <li>Small tweaks to 7A flag 11</li>
+                <li>Updated Presented By titlecard</li>
+                <li>Implemented unused Dash Assist aim SFX</li>
+            </ul>
+            
+            <h2>Bug Fixes:</h2>
+            <ul>
+                <li>File Renaming text now respects Photosensitive Mode</li>
+                <li>Fixed 'See Theo' cutscene in Chapter 5 repeating if you leave and re-enter the room</li>
+                <li>Fixed PICO-8 Celeste update-loop inconsistency from the original PICO-8 version</li>
+                <li>Fixed the bird in Farewell flinging you a slightly inconsistent distance after a respawn</li>
+                <li>Fixed XNA crash when moving the game window between monitors</li>
+                <li>Fixed player depth not resetting in Chapter 9 fake heart if you skip at the right time</li>
+                <li>Fixed weird bug in temple ending if you run into the eyeball while holding Theo</li>
+                <li>Fixed Up/Down input repeating bug, where certain applications would cause Celeste to think up/down were constantly being pressed</li>
+                <li>Fixed a few small respawn facing the wrong direction in Ch5 and Ch9</li>
+                <li>Fixed the Chapter Select card graphic being slightly misaligned</li>
+                <li>Fixed Button / Keyboard config menus freezing if opened during the Dash Tutorial in the Prologue</li>
+                <li>Fixed Various PICO-8 Celeste emulation bugs (thanks gonengazit for the detailed notes)</li>
+                <li>Fixed a crash if the Lookout spawns inside an Exit Block</li>
+                <li>Fixed a few missing filler rooms in Ch5 that you could see during room transitions</li>
+                <li>Fixed issue where jumpthrough platforms would show the wrong edge tile if they spawned inside solids</li>
+                <li>Fixed soft lock in Ch5 Cutscene if you save Theo with Dash Assist enabled</li>
+                <li>Fixed Credits soft lock if you have Dash Assist enabled</li>
+                <li>Fixed summit ridge section using resort-style moving wooden platforms</li>
+                <li>Fixed Dream block transition visuals getting stuck if you Skip Cutscene during it</li>
+                <li>Fixed a few small visual errors with decals</li>
+                <li>Fixed threading error with the File Slot graphic which stopped them from becomming visible in rare instances</li>
+            </ul>
+			<br /><br />
+
+			<h1>V1.3.3.20 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>Fixed movement/dash-only inputs not refreshing on menu close</li>
+			</ul>
+			<br /><br />
+
+			<h1>V1.3.3.19 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>After a 'Crouch Dash' bind is set, a 'Crouch Dash Mode' option will now appear. 'Press' mode crouch dashes when the button is pressed. 'Hold' mode crouch dashes when the button is held and a regular dash button is pressed</li>
+				<li>Madeline now uses the ducking sprite when crouch dashing</li>
+				<li>Fixed control inversions when using Mirror Mode variant</li>
+				<li>Fixed the 'See Theo' cutscene in Chapter 5 repeating if you re-enter the room</li>
+			</ul>
+			<br /><br />
+
+			<h1>V1.3.3.18 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>Added 'Invert' Grab Mode - Madeline grabs when the grab button is not held</li>
+				<li>Fixed inconsistency with dash aiming deadzones</li>
+				<li>Fixed being unable to crouch dash out of red bubble dash state</li>
+				<li>Fixed swimming and feather controls using dash-only binds and not movement-only binds</li>
+			</ul>
+			<br /><br />
+
+			<h1>V1.3.3.17 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>Added Grab Mode option - now you can make the grab button a toggle</li>
+				<li>Added advanced binding options: directionals for movement- and dashing-only</li>
+				<li>Reverted a previous binding priority change that was designed to recreate some specific behavior from pre-beta. The movement- and dashing-only binds should serve that purpose now</li>
+				<li>Reorganized the binding menus a bit</li>
+				<li>The Reset Defaults button on the binding menu must now be held to confirm resetting</li>
+			</ul>
+			<br /><br />
+
+			<h1>V1.3.3.16 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>Removed hard-coded Quick Restart shortcut on gamepads (L + R + Start) because it interferes with custom bindings now that there is more binding freedom. Now you must bind a specific Quick Restart button to use this feature on gamepads</li>
+				<li>Fixed talk and jump buttons being bound to the same button causing Madeline to jump at the start of every talk-initiated cutscene</li>
+				<li>Fixed simultaneous presses of opposing directional inputs not properly cancelling out when calculating dash aim direction</li>
+			</ul>
+			<br /><br />
+
+			<h1>V1.3.3.15 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>Fixed demo dash button not triggering rumble</li>
+				<li>Fixed incorrect button overlap behavior for dash aiming</li>
+				<li>Fixed an issue with clearing menu bindings</li>
+				<li>Reorganized menu options slightly</li>
+				<li>Invalid sfx now played if unable to clear a Menu binding</li>
+			</ul>
+			<br /><br />
+
+			<h1>V1.3.3.14 (beta)</h1>
+			<h2>V1.3.3.13 was missing some commits. No changes.</h2>
+
+			<br /><br />
+			<h1>V1.3.3.13 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>Menu buttons (up, down, left, right, confirm, cancel, pause, journal) must each have 1 button/key bind that is unique among all of the menu buttons. If a rebind would break this rule, it will fail and a sound will play. Duplicate menu binds that do not break this rule are now allowed.</li>
+				<li>Updated the bind priority system to work closer to pre-beta</li>
+				<li>Removed menu functionality from the Crouch Dash bind. You can now bind menu down + confirm to get that functionality</li>
+				<li>Binding menu controls now stay onscreen as you scroll down the menu</li>
+				<li>Fixed bug where the Binding menu could be exited when you reset to default controls</li>
+			</ul>
+
+			<br /><br />
+			<h1>V1.3.3.12 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>Demodash bind is no longer gated behind Cheat Mode</li>
+				<li>Fixed demodash button not skipping cutscene from intro vignette in Prologue</li>
+				<li>LT no longer hides the pause overlay while in the Options menu or Controls config menus</li>
+				<li>Fixed boost bubbles "storing" the last demodash state</li>
+				<li>Overhauled the controls system to allow for rebinding of menu controls and gamepad directional inputs
+					<br />(Note: current bindings will be reset to default when first updated)</li>
+			</ul>
+
+			<br /><br />
+			<h1>V1.3.3.11 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>Fixed demodash button not triggering boost bubbles</li>
+				<li>Demodash button now selects Retry or Skip Cutscene from the pause menu while paused</li>
+				<li>Demodash button is now bindable from the options menu after Cheat Mode has been activated on any savefile</li>
+			</ul>
+
+			<br /><br />
+			<h1>V1.3.3.10 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>Increased Madeline's maximum vertical squish wiggle distance so that all previously-survivable crush scenarios should be survivable again</li>
+				<li>Added a bind for DemoDash to the settings file (you must edit the settings file directly, there is no in-game option)</li>
+				<li>Implemented unused Dash Assist aim SFX</li>
+			</ul>
+
+			<br /><br />
+			<h1>V1.3.3.9 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>Fixed squish correction putting Madeline in the ducking state while climbing</li>
+				<li>Fixed squish correction not applying when pushed by fast-moving blocks</li>
+				<li>Fixed summit ridge section using resort-style moving wooden platforms</li>
+				<li>Fixed Dream block transition visuals getting stuck if you Skip Cutscene during it</li>
+				<li>Fixed a few small visual errors with decals</li>
+				<li>Dash correction checks now use the hurtbox rather than the physicsbox</li>
+				<li>Small tweaks to Summit flag 11</li>
+			</ul>
+
+			<br /><br />
+
+			<h1>V1.3.3.8 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>Fixed corner correction on spike walls not working</li>
+				<li>Dashes no longer correct below to ground with spikes</li>
+				<li>File Renaming text respects Photosensitive Mode</li>
+				<li>Updated Presented By titlecard</li>
+			</ul>
+
+			<br /><br />
+
+			<h1>V1.3.3.7 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>Reverted ultra changes to pre-beta</li>
+				<li>Added a grace period of 0.01s for gaining horizontal boosts off of explosions by holding the direction you will be sent in at the moment of impact. Examples of explosions are bumpers, puffer fish, and respawning seekers. 0.01s is a single frame at 100% game speed, but because explosion impacts freeze the game for 0.1s, this is effectively a 0.1s grace period.</li>
+				<li>Fixed the bird in Farewell flinging you a slightly inconsistent distance after a respawn</li>
+				<li>Fixed IGT still freezing when unpausing from sub-menus, or from Quick Restart</li>
+				<li>Some minor changes to 3B</li>
+				<li>Quick Restart also has 0.1s of input buffer</li>
+				<li>Fixed PICO-8 Celeste update-loop inconsistency from the original PICO-8 version</li>
+			</ul>
+
+			<br /><br />
+
+			<h1>V1.3.3.6 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>Fixed buffered Climb Jumps also keeping momentum from the ultra momentum fix</li>
+			</ul>
+
+			<br /><br />
+
+			<h1>V1.3.3.5 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li><i>Experimental</i>: Fixed inconsistent results with jumping during ultras</li>
+				<li>Fixed MoveBlocks giving inconsistent momentum when moving vertically and being steered horizontally</li>
+				<li>Fixed game timer freezing during unpause (this adds 0.15s IGT to each unpause compared to pre-beta)</li>
+				<li>Fixed a bug where wall jumps from the right side of walls could sometimes not gain the momentum of the wall</li>
+			</ul>
+
+			<br /><br />
+
+			<h1>V1.3.3.4 (beta)</h1>
+			<h2>Changes</h2>
+			<ul>
+				<li>Fixed stray tile in 7B</li>
+				<li>Fixed a stray spike in Farewell Determination 1</li>
+				<li>Fixed a case where dash corner correction would pop up up above spikes</li>
+				<li>Added '--graphics [DRIVER]' and '--disable-lateswaptear' to FNA command-line arguments, which corresponds 
+					with <a href="https://github.com/FNA-XNA/FNA/wiki/7:-FNA-Environment-Variables#fna3d_force_driver">FNA3D_FORCE_DRIVER</a> 
+					and <a href="https://github.com/FNA-XNA/FNA/wiki/7:-FNA-Environment-Variables#fna3d_disable_lateswaptear">FNA3D_DISABLE_LATESWAPTEAR</a> respectively</li>
+			</ul>
+
+			<br /><br />
+            
+			<h1>V1.3.3.3 (beta)</h1>
+			<h2>Bug Fixes</h2>
+			<ul>
+				<li>Fixed boost typo from last build that doubled boost speed</li>
+				<li>Fixed Credits soft lock if you have Dash Assist enabled</li>
+			</ul>
+            
+            <br /><br />
+
+			<h1>V1.3.3.2 (beta)</h1>
+			<h2>Changes And Additions</h2>
+			<ul>
+				<li>Reverted the Determination Secret room to pre-beta</li>
+				<li>Changed the depth of the Chapter 4 white block to be behind Madeline when she enters the room</li>
+				<li>Dash corner correction no longer applies if the corner has spikes on top of it</li>
+				<li>Dash jump-thru correction no longer applies if the jump-thru has spikes on top of it</li>
+				<li>Fixed soft lock in Ch5 Cutscene if you save Theo with Dash Assist enabled</li>
+			</ul>
+            
+            <br /><br />
+		  
+			<h1>V1.3.3.1 (beta)</h1>
+			<h2>Changes And Additions</h2>
+			<ul>
+				<li>Moved the new spike in Event Horizon 9</li>
+				<li>Reworked Determination Secret a bit</li>
+				<li>Added a falling block to Determination 8, shifted the exit block back</li>
+				<li>Death pit killbox is now 4 pixels lower than before beta (was 8)</li>
+				<li>Removed ridge gate blocks from Power Source Hub, changed numbers to glowing circles</li>
+			</ul>
+            
+            <br /><br />
+
+            <h1>V1.3.3.0 (beta)</h1>
+			<h2>Changes and Additions</h2>
+			<ul>
+				<li>Added additional Screenshake option, options are now Off / 50% / 100%</li>
+				<li>Made Ch3 Master Suite Oshiro idle conversation skippable</li>
+				<li>Keyboard icons will be used instead of Controller icons, if the keyboard was the last device used.</li>
+				<li>Reduced High Resolution art asset sizes, as the game doesn't actually draw them at their full resolution. This greatly reduces asset size.</li>
+				<li>Removed old Binary save file format from when the game first released.</li>
+				<li>Added 0.1s of input buffering on the Pause input</li>
+				<li>Moved the bottom screen kill zone down 8px</li>
+				<li>Added some visual hints to the Chapter 4 Heart</li>
+				<li>Updated to the latest version of FNA, introducing FNA3D. This means the FNA version can run DirectX on Windows and Metal on Mac.</li>
+			</ul>
+
+			<h2>Chapter 9 Level Changes</h2>
+			<ul>
+				<li>Added a spike to Singular 11</li>
+				<li>Added cracked tiles and number decals to Power Source Hub</li>
+				<li>Added spikes to Power Source 4th Key</li>
+				<li>Added a spike to Event Horizon 9</li>
+				<li>Secret in Determination 7 no longer requires demodash</li>
+				<li>Redesigned Determination Secret</li>
+				<li>Shifted the exit block forward in Determination 8</li>
+				<li>Shifted spikes and electricity, added a refill in Reconciliation 8</li>
+				<li>Progress Gates in Power Source never closed properly and had the wrong sprite... Now they do.</li>
+			</ul>
+
+			<h2>Bug Fixes</h2>
+			<ul>
+				<li>Fixed XNA crash when moving the game window between monitors</li>
+				<li>Fixed player depth not resetting in <spoiler>Chapter 9 fake heart</spoiler> if you skip at the right time</li>
+				<li>Fixed weird bug in temple ending if you run into the eyeball while holding Theo</li>
+				<li>Fixed Up/Down input repeating bug, where certain applications would cause Celeste to think up/down were constantly being pressed</li>
+				<li>Fixed a few small respawn facing the wrong direction in Ch5 and Ch9</li>
+				<li>Fixed the Chapter Select card graphic being slightly misaligned</li>
+				<li>Fixed Button / Keyboard config menus freezing if opened during the Dash Tutorial in the Prologue</li>
+				<li>Fixed Various PICO-8 Celeste emulation bugs (thanks gonengazit for the detailed notes)</li>
+				<li>Fixed a crash if the Lookout spawns inside an Exit Block</li>
+				<li>Fixed a few missing filler rooms in Ch5 that you could see during room transitions</li>
+				<li>Fixed issue where jumpthrough platforms would show the wrong edge tile if they spawned inside solids</li>
+			</ul>
+            
+            <br /><br />
+            
+            <h1>V1.3.1.2</h1>
+			<h2>Changes and Additions</h2>
+            <ul>
+                <li>Redesigned and reverted some levels in Chapter 9 after community feedback</li>
+            </ul>
+            
+			<br /><br />
+
+            <h1>V1.3.1.1</h1>
+			<h2>Changes and Additions</h2>
+            <ul>
+                <li>Speedrun Timer continues running while using Dash Assist</li>
+                <li>Redesigned and reverted some levels in Chapter 9 after community feedback</li>
+            </ul>
+            
+			<br /><br />
+
+            <h1>V1.3.1.0</h1>
+			<h2>Changes and Additions</h2>
+            <ul>
+                <li>Added Dash Assist to the Assist Mode options (note: not yet localized)</li>
+                <li>Final dialog in <spoiler>Chapter 9</spoiler> plays after <spoiler>50 deaths instead of 12</spoiler></li>
+                <li>Various small level-design changes and fixes throughout <spoiler>Chapter 9</spoiler></li>
+            </ul>
+			
+			<h2>Bug Fixes</h2>
+			<ul>
+                <li>Fixed <spoiler>Golden Strawberries</spoiler> spawning in <spoiler>Chapter 9</spoiler> before you have completed it</li>
+                <li>Fixed The File Slot <spoiler>turning Golden when you have 201 Strawberries, instead of 202</spoiler></li>
+                <li>Fixed bug where the Puffer Fish disappear when they're crushed between walls</li>
+                <li>Fixed bug where exiting a dream block wouldn't always activate wall springs</li>
+                <li>Fixed Spawn bug where the 2nd Checkpoint in Chapter 4 would place you at the wrong position</li>
+                <li>Fixed missing Madeline sprite for when she changes direction when she has no backpack</li>
+                <li><spoiler>The death warp in Chapter 9 before the Moon Berry only moves Strawberries, which fixes a bug with Keys</spoiler></li>
+                <li>Fixed a frame-perfect bug with Tween caching which was causing a bug when <spoiler>picking up the Glider or Theo</spoiler>. This potentially also addresses other obscure and rare bugs, like the File Slots not appearing.</li>
+                <li>Fixed a word-wrapping bug in the Journal in Italian</li>
+                <li>Fixed grabbing a Dream-block on-exit when the game is <spoiler>running at high speeds in Variant mode</spoiler></li>
+                <li>Can no longer hide the HUD in the Farewell ending Cutscene, which caused an empty room to be displayed</li>
+                <li>Fixed the in-game Variants Menu option still having a "BETA" tag in English</li>
+                <li>macOS: Fixed bug where the main thread wouldn't exit gracefully when quitting the game, causing a crash</li>
+                <li>Linux: Updated SDL FMOD binaries to fix a potential race-condition crash when starting the game</li>
+            </ul>
+            
+            <br />
+
+            Note: Revised 1.3.0.0 patch notes as it was missing or incorrectly describing some changes.
+            
+			<br /><br />
+
+            <h1>V1.3.0.0</h1>
+			<h2>Please Welcome:</h2>
+            <ul>
+                <li>Chapter 9: Farewell</li>
+            </ul>
+
+            <h2>Changes & Additions:</h2>
+            <ul>
+                <li>Small level updates to CH5 and CH6 B-Sides</li>
+                <li>Made in-game Checkpoint icons more visible</li>
+                <li>Updated the visual design of the creature Barriers in Chapter 5</li>
+                <li>Cassette Block visual pattern is slightly different for each color</li>
+                <li>Optimized loading on Consoles to reduce startup time</li>
+                <li>Using <spoiler>Cheat Mode makes Golden Strawberries always available in the C-Sides</spoiler></li>
+                <li>Added <spoiler>"Other You" Variant that lets you play as Madeline's reflection</spoiler></li>
+                <li>Vertical Wind now has a Sound Effect</li>
+            </ul>
+
+            <h2>UI Design Changes:</h2>
+            <ul>
+                <li>Added a Stamp for collecting 8 Cassettes</li>
+                <li>Added a Stamp for completing Chapter 9</li>
+                <li>Made the "Full Clear" icon more subtle</li>
+                <li>Added a short hint when "Return to Map" is selected, to better explain what it does (thanks <a href="https://twitter.com/0x0ade">@0x0ade</a>). It also shows the picture of the furthest checkpoint you've reached.</li>
+                <li>Return to Map and Restart Chapter's sub-menus are no longer titled "Give Up"</li>
+                <li>Assist Mode description text modified (thanks <a href="https://twitter.com/halfcoordinated">@halfcoordinated</a> & <a href="https://twitter.com/Kathy_E_J">@Kathy_E_J</a>)</li>
+                <li>Assist Mode, Variant Mode, and Cheat Mode File Slot icons changed from Stamps to Tabs</li>
+                <li>Assist Mode Skip no longer moves the camera to the next chapter before unlocking it</li>
+                <li>Option Menu items don't auto-wrap (must press the up/down button)</li>
+                <li>You can now skip the Overworld Stat tallying by pressing Start / Enter, regardless of the Speedrun Timer mode</li>
+                <li>Changed some Keyboard button images to use icons instead of text, for non-English speakers</li>
+                <li>You can store a "Default File Name" by holding RT and LT when you Accept on the renaming screen, or by pressing CTRL+S. All new files will then default to the given name.</li>
+                <li>Chapter Timer (IL Timer) no longer hides during cutscenes and visually behaves the same as the File Timer (with the exception of Chapter-Complete, where it will hide after 3s)</li>
+                <li>Removed Full Clear File Stamp</li>
+            </ul>
+
+            <h2>Language Updates:</h2>
+            <ul>
+                <li>Redid the Japanese Localization (thanks <a href="http://8-4.jp">8-4</a>)</li>
+                <li>Updated the German Localization (thanks <a href="https://www.shloc.com">shloc</a>)</li>
+                <li>Added a unique Japanese File-Naming screen</li>
+                <li>Added Korean Language</li>
+                <li>Fonts are now only loaded when the language is in-use, instead of always being in memory</li>
+            </ul>
+
+            <h2>Bug Fixes:</h2>
+
+            <ul>
+                <li>Fixed rendering red boosters at a floating position, causing small visual bug on some computers</li>
+                <li>Skipping level stat-tally doesn't show a visual effect on stats that are unchanged</li>
+                <li>Fixed upward dash corner push-around not working with the <spoiler>Super Dash Variant</spoiler></li>
+                <li>Fixed rendering bug where Madeline's dash trail could face the wrong way</li>
+                <li>Fixed bug where the player would play her idle sound effects while using the Lookout</li>
+                <li>If the player name can't be displayed in the current language (ex. it has Japanese characters but the player is now playing in English), it displays her name as "Madeline" instead of nothing.</li>
+                <li>Fixed bug where you could pause while interacting with the PICO-8 console in Chapter 3. This could cause crashes if you Restart.</li>
+                <li>Fixed bug where 1-UP sound would only play on the first 1-UP. It now plays on each consecutive one.</li>
+                <li>Fixed small background visual bug in Ch1 B-Side where you could see past the bottom</li>
+                <li>Fixed a crash if you die while interacting with a Lookout</li>
+                <li>Fixed bug where you could interact with a Lookout that was a tile above you</li>
+                <li>Fixed soft-lock if you manage to start a screen transition while also interacting with a Lookout</li>
+                <li>Fixed Hazards not always attaching themselves to moving platforms if the hazard also overlapped a wall when entering a level from a save-file.</li>
+                <li>Fixed bug where you weren't always able to grab a dream block as you exit it, if you're playing over 100% game speed.</li>
+                <li>Fixed soft lock if you die on the last frame of collecting a Crystal Heart</li>
+                <li>Fixed conveyor belt ambient sounds in Ch8 not always playing properly</li>
+                <li>Fixed bug where you could lose Strawberries in 2A if you skip the Payphone conversation without collecting them</li>
+                <li>Fixed getting stuck in a wall in Ch5 if you skip a cutscene while Madeline is at a weird height</li>
+                <li>Can no longer wall-jump off invisible screen barriers</li>
+                <li>IL Timer now properly shows more than 24 hours</li>
+                <li>Theo Crystal wouldn't always bounce off red spikes due to a float precision error on some operating systems / versions of the game</li>
+                <li>Fixed bug in Chapter 2 where you could miss the Instagram Filter if you left and re-entered the room between conversations</li>
+                <li>Fixed bug where the Prologue bridge would keep rumbling in Assist Mode if you let the bridge fully collapse</li>
+                <li>Fixed bug where the Pause menu wouldn't scroll or fade properly if you pause during the slow-motion section of the Prologue</li>
+                <li>Fixed various Sound fade-in bugs with Chapter 8 Conveyor Belts and Fireballs</li>
+            </ul>
+
+            <br /><br />
+
+            <h1>V1.2.6.1</h1>
+			<h2>Changes and Additions</h2>
+            <ul>
+                <li>Rolled back holdable regrab delay as it wasn't meant to affect current strats (0.25s -> 0.10s)</li>
+            </ul>
+			
+            
+			<br /><br />
+
+            <h1>V1.2.6.0</h1>
+			<h2>Changes and Additions</h2>
+            <ul>
+                <li><spoiler>C-Side</spoiler> Chapter rebalancing</li>
+                <li>The Prologue Dash cutscene is skippable</li>
+				<li>Options menus with more than 2 items now wraps</li>
+                <li>If the Speedrun timer is on, stat-tally after returning to the map is skipped</li>
+                <li>Increased the delay after you release a holdable item before you can pick it up again (0.10s -> 0.25s)</li>
+            </ul>
+			
+			<h2>Bug Fixes</h2>
+			<ul>
+                <li>Fixed negative floating-number parsing in some rare places if the user has a different OS region set</li>
+                <li><spoiler>Theo Crystal</spoiler> interacts with side-springs properly</li>
+                <li>Keys interact properly with multiple nearby Lock-Blocks (ex. can't unlock more than one)</li>
+			</ul>
+            
+			<br /><br />
+
+			<h1>V1.2.5.3</h1>
+			<h2>Changes and Additions</h2>
+            <ul>
+				<li>Added "Community" Section to the Game Credits</li>
+				<li>Added Version Number to Epilogue screen when Speedrun Timer is enabled</li>
+			</ul>
+			
+			<h2>Bug Fixes</h2>
+			<ul>
+				<li>More <spoiler>Hiccup</spoiler> behavior fixes</li>
+				<li>Fixed Shorthops being impossible while <spoiler>Hiccups Variant is enabled</spoiler></li>
+				<li><spoiler>Hiccups randomization</spoiler> is now seeded based on level</li>
+			</ul>
+
+			<br /><br />
+
+			<h1>V1.2.5.2</h1>
+			<h2>Changes and Additions</h2>
+            <ul>
+				<li>Rolled back dash cooldown change (cooldown is back to 0.20s)</li>
+				<li><spoiler>Hiccup interval is now randomized from 0.12-0.18s and causes rumble</spoiler></li>
+				<li>The <spoiler>player-controlled Seeker</spoiler> now obeys the <spoiler>Invisible Motion variant</spoiler></li>
+			</ul>
+			
+			<h2>Bug Fixes</h2>
+			<ul>
+				<li>Fixes some bugs with <spoiler>hiccups</spoiler> triggering during uninteruptable actions, and playing sounds incorrectly</li>
+				<li>Fixed a missing spawn point in a 1-B level</li>
+			</ul>
+
+			<br /><br />
+
+			<h1>V1.2.5.1</h1>
+            <h2>Bug Fixes</h2>
+            <ul>
+				<li>Fixed being able to get ultra speed from mashing down-diagonal dashes on flat ground</li>
+				<li>Fixed not being able to <spoiler>Super Wall Jump</spoiler> at the end of a <spoiler>Super Dash</spoiler>, with <spoiler>the Super Dashing variant enabled</spoiler></li>
+			</ul>
+
+			<br /><br />
+
+			<h1>V1.2.5.0</h1>
+            <h2>Changes and Additions</h2>
+            <ul>
+				<li>Added <spoiler>Variants Mode! A collection of special options to change the rules of the game</spoiler>, unlocked after completing the <spoiler>C-Sides</spoiler>. Activate <spoiler>Variants Mode</spoiler> on the File Select menu</li>
+				<li>Reduced the dash cooldown, ie the time after dashing before you can regain your dash (0.20s -> 0.15s)</li>
+				<li>When playing with the speedrun clock enabled, Chapter Complete screens will now show the <spoiler>Variant</spoiler> or Assist mode stamps if they are active, as well as the version number</li>
+				<li>Spikes on rhythm blocks are now visible even when the block is inactive, and are colored to match the block</li>
+				<li>Removed an invisible ceiling from a level near the end of <spoiler>Core A-Side</spoiler></li>
+				<li>The player can now press the grab button to trigger blocks (such as falling blocks or zip movers) that are beside them, even if they are out of stamina or <spoiler>the No Grabbing Variant is enabled</spoiler></li>
+			</ul>
+			
+			<h2>Bug Fixes</h2>
+            <ul>
+				<li>Fixed a bug where Madeline would keep the "running against wind" animation after wind has stopped</li>
+            </ul>
+
+            <br /><br />
+
+			<h1>V1.2.4.1</h1>
+            <h2>Changes and Additions</h2>
+            <ul>
+                <li>Reverted strawberry change from patch 1.2.4.0</li>
+			</ul>
+			
+            <br /><br />
+
+			<h1>V1.2.4.0</h1>
+            <h2>Changes and Additions</h2>
+            <ul>
+                <li>Collecting a <spoiler>Red or Gold Heart</spoiler> now stops the File Timer so players don't have to "Return to Map" on <spoiler>B and C Sides</spoiler> to save time.</li>
+                <li>Chapter 4 early Strawberry level design fix</li>
+            </ul>
+
+            <h2>Bug Fixes</h2>
+            <ul>
+				<li>Hitting two "back" keys at once no longer resumes the game without closing the menu (known as "menu storage")</li>
+				<li>Spinning Spikes had an internal error with their starting direction that is now fixed (has no effect on official Celeste levels)</li>
+				<li>Fixed Missing Chapter 4 <spoiler>B-Side</spoiler> Checkpoint marker in the level background</li>
+            </ul>
+
+            <br /><br />
+
+            <h1>V1.2.3.2</h1>
+            <h2>Bug Fixes</h2>
+            <ul>
+                <li>When dashing with a Red Bubble, the player direction is now set to the direction of the dash</li>
+                <li>Fixed soft-lock in <spoiler>Chapter 8 B-Side</spoiler></li>
+            </ul>
+
+            <br /><br />
+            
+            <h1>V1.2.3.1</h1>
+            <h2>Bug Fixes</h2>
+            <ul>
+                <li>Fixed being able to super wall jump off of any wall with horizontal spikes</li>
+                <li>Fixed a crash if you die before the Chapter 6 <spoiler>Boss introduction</spoiler> cutscene starts</li>
+            </ul>
+
+            <br /><br />
+
+            <h1>V1.2.3.0</h1>
+            <h2>Changes and Additions</h2>
+            <ul>
+                <li><spoiler>Seeker respawn explosions</spoiler> can now trigger touch switches</li>
+                <li>Added 1 pixel (4->5) to distance player will wiggle to avoid bonking on a ceiling corner, but only when she is dashing straight upward</li>
+                <li>Added 2 pixels (3->5) to maximum distance from a wall that the player can wall jump, but only when she is dashing straight upward</li>
+                <li>Journal can now always be opened in <spoiler>Cheat Mode</spoiler>, even if no Chapter A-Side has been completed</li>
+                <li>Beating a chapter with all collectibles should always now register a full clear, even if you didn't start from the beginning (but you will still need to start from the beginning to register speedrun times)</li>
+            </ul>
+
+            <br /><br />
+
+            <h1>V1.2.2.6</h1>
+            <h2>Changes and Additions</h2>
+            <ul>
+                <li>Strawberries now automatically collect if you complete a chapter and skip the cutscene before their collect animation plays</li>
+                <li>Increased a Chapter 1 level's ceiling by 1 tile (first level right of the first checkpoint)</li>
+            </ul>
+
+            <h2>Bug Fixes</h2>
+            <ul>
+                <li>Skipping Chapter 6 intro cutscene while the picture is open now properly closes the picture</li>
+                <li>Fixed a textbox occasionally appearing over the <spoiler>Epilogue picture</spoiler> if the cutscene is skipped</li>
+                <li>Some Chapter 7 <spoiler>B-Side</spoiler> jumpthrough platforms had the wrong texture</li>
+                <li><spoiler>Ice Blocks in Chapter 8</spoiler> sometimes moved in the wrong direction if you buffer climb jumped off them</li>
+                <li>Potential fix to "Default Particle" sometimes being 2px big instead of 1px if the graphics device was reset</li>
+            </ul>
+
+            <br /><br />
+
+            <h1>V1.2.2.4</h1>
+            <h2>Changes and Additions</h2>
+            <ul>
+                <li>You can now perform a climb jump from the Dash state, just like from the Normal state</li>
+                <li>Made minor changes to spike positions in Chapter 7 <spoiler>C-Side</spoiler></li>
+                <li>Made the Speedrun Timer always use the English font. Increased size of Milliseconds from 0.5 scale to 0.7</li>
+                <li>Dashing upward diagonally doesn't have frame delay before you can <spoiler>super jump</spoiler></li>
+                <li>You can now <spoiler>hyper jump</spoiler> from coyote time</li>
+                <li>Some small detailing changes to Chapters 7 <spoiler>and 8</spoiler></li>
+                <li>Removed "Inactive Sleep Time" so that the game doesn't reduce framerate when unfocused</li>
+                <li>On Desktop, Backups are now saved into their own folder and not stored on the Steam Cloud</li>
+                <li>If the game is unable to write to the save file, it adds the exception to the error_log.txt</li>
+                <li>Added an option into the Settings file to allow users to turn on "FMOD Live Update", for when the <a href="https://twitter.com/regameyk/status/987588060303912960">FMOD Studio project is released</a></li>
+            </ul>
+
+            <h2>Bug Fixes</h2>
+            <ul>
+                <li>Fixed some player spawn locations in Chapter 5 B-Side, Chapter 7, and Chapter 3 <spoiler>C-Side</spoiler></li>
+                <li>Fixed bug where you could only have 15 strawberries following you at once</li>
+                <li>Falling Blocks now start falling again if the object they land on also falls or breaks</li>
+                <li>Chapter Timer doesn't start until after the beginning cutscene is over</li>
+                <li>Fixed bug with Mountain Vertex Buffer being disposed at an incorrect time</li>
+                <li>Can no longer get stuck inside the floor of the <spoiler>Chapter 5 Mirror Curtain</spoiler></li>
+                <li>Fixed crash during the Feather minigame if your monitor was larger than 4096px</li>
+                <li>Fixed missing invisible barrier in Chapter 5 B-Side</li>
+                <li>Fixed perfectly-buffered <spoiler>hyper jumps counting as super jumps</spoiler></li>
+                <li>Fixed wall jump taking precendence over <spoiler>hyper jump</spoiler></li>
+                <li>Pushing Animation didn't have step sound effects</li>
+                <li>Fixed bug where if you started a new file in Russian, and then switched your langauge back to English, the player's name would no longer draw</li>
+                <li>Fixed where if you moved too quickly into an adjacent room with a Temple Gate, the gate could close on you</li>
+                <li>Fixed some typo's in Simplified Chinese</li>
+                <li>Fixed bug where the achromatic aberration effect was only applied if "Photosensitive Mode" was turned on</li>
+            </ul>
+
+            <br /><br />
+
+            <h1>V1.2.1.0</h1>
+            <h2>Changes and Additions</h2>
+            <ul>
+                <li><b>Breaking Change:</b> The Chapter timer no longer pauses during deaths, cutscenes, and 
+                    in-game menus. Previously it was possible to exploit the timer by retrying on some screen 
+                    transitions, which we didn't feel was a fun way to play. Unfortunately due to this change 
+                    Speedrun times for single-chapters will be cleared. We decided it was best to make this 
+                    change now while the game is still early in its speedrun life.</li>
+                <li>Menu text does not flash when selected if Photosensitive Mode is enabled</li>
+                <li>Quick Restart hint only displays if you go to it through the Menu</li>
+                <li>Assist Mode speed option no longer affects the game speed during player deaths or cutscenes</li>
+            </ul>
+
+            <h2>Bug Fixes</h2>
+            <ul>
+                <li>Fixed thread loading bug for the Chapter 7 intro vignette</li>
+                <li>Fixed rare division by 0 which caused the player speed to be NaN, resulting in a crash when wall-jumping</li>
+                <li>Fixed <spoiler>Madeline's hair being the wrong color</spoiler> on the Mountain Overworld when you exit Chapter 7, The Epilogue, or Chapter 8</li>
+            </ul>
+
+            <br /><br />
+
+            <h1>V1.2.0.0</h1>
+
+            <h2>Changes and Additions</h2>
+
+            <h3>Options Changes</h3>
+            <ul>
+                <li>Added an option to disable screen shake</li>
+                <li>Rumble strength can now be adjusted to “100%”, “50%”, or “OFF”</li>
+                <li>Assist Mode can now always be toggled on and off from the file select menu</li>
+                <li>Progress page in the Journal now shows total time played, instead of sum of chapters (so it includes the Prologue and Epilogue time, same as the file select menu)</li>
+                <li>Added a “Quick Restart” function, for faster Chapter Restarts. Hold both shoulder buttons and press the pause button on controllers, or press R on keyboard.</li>
+            </ul>
+
+            <h3>Speedrun Timer</h3>
+            <ul>
+                <li>Timer is no longer hidden during player death</li>
+                <li>Timer stays paused during Chapter 7 <spoiler>flying sequences</spoiler></li>
+                <li>Added a new Timer mode that shows your File time. This also displays file time on Chapter Complete screens</li>
+                <li>Credits and Epilogue Complete Screen no longer count towards File Time</li>
+            </ul>
+
+            <h3>General</h3>
+            <ul>
+                <li>You can now skip the intro credits on the Desktop version of the game, though a loading icon will be displayed until the game is ready</li>
+                <li>Reduced hitstun time when collecting a refill gem (0.10s -> 0.05s)</li>
+                <li>Reduced the time you have to <spoiler>duck</spoiler> on the <spoiler>white block in Chapter 4</spoiler> to activate it</li>
+                <li>The <spoiler>giant eyeball shockwaves</spoiler> no longer push Madeline while she is dashing</li>
+                <li>Added milliseconds to file select playtime display</li>
+                <li><spoiler>Golden Strawberries</spoiler> now collect immediately when the Chapter is considered Completed</li>
+                <li>Assist Mode speed no longer affects Cutscenes or Deaths</li>
+            </ul>
+
+            <h3>Level changes</h3>
+            <ul>
+                <li>Prevented a lame unintentional skip in the last level of Chapter 7 <spoiler>C-Side</spoiler></li>
+                <li>Fixed some camera issues in Chapter 2 <spoiler>C-Side</spoiler></li>
+                <li>Rebalanced Chapter 5 <spoiler>C-Side</spoiler></li>
+                <li>Added a glowing light to the exit in the last <spoiler>Badeline chase</spoiler> level of Chapter 2</li>
+                <li>Made adjustments to some levels to finetune difficulty</li>
+                <li>Made adjustments to some level decorations to improve readability</li>
+            </ul>
+
+            <h3>Cutscene changes</h3>
+            <ul>
+                <li>Made more use of Madeline’s startled animation (ex. When she first meets Mr. Oshiro)</li>
+                <li>Made timing adjustments in Chapter 6 <spoiler>old lady</spoiler> cutscene, for comedic effect</li>
+                <li>Skipping the 2nd cutscene in Chapter 6 puts you directly to the <spoiler>Lake checkpoint</spoiler></li>
+            </ul>
+
+            <h3>Player Physics</h3>
+            <ul>
+                <li>Increased the maximum distance that Madeline will shift to avoid solids when exiting a Dream Block (4 pixels -> 5 pixels)</li>
+                <li>Changes to explode-launching Madeline (caused by Bumpers and <spoiler>Seeker respawn shockwaves</spoiler>):
+                <ul>
+                    <li>Previously, Madeline’s x-axis launch speed was multiplied by 1.2 if her x-axis input was neutral or in the same direction as the launch at the moment of impact. </li>
+                    <li>Neutral inputs will no longer grant the launch speed bonus. X-axis input must now be in the same direction as the launch at the moment of impact.</li>
+                </ul>
+                </li>
+            </ul>
+
+            <h2>Bug Fixes</h2>
+            <h3>Fixed several issues with checkpoint polaroid UI:</h3>
+            <ul>
+                <li>Chapters 1 and 6 cassettes were listed under the wrong polaroids</li>
+                <li>Chapter 8 cassette was not listed under any polaroid</li>
+            </ul>
+
+            <h3>Localization Fixes</h3>
+            <ul>
+                <li>Fixed dialog typos in Chapters 1 and 3, in Japanese</li>
+                <li>Fixed capitalization on German and Russian language titles</li>
+                <li>Fixed Assist Mode On/Off text being inverted in Brazilian Portuguese</li>
+            </ul>
+            <h3>Cutscene Fixes</h3>
+            <ul>
+                <li>Fixed Mr. Oshiro sometimes letting you talk to him on the wrong side, making the dialog portraits inaccurate in Chapter 3</li>
+                <li>Fixed missing dialog cue in Chapter 6 <spoiler>campfire cutscene</spoiler></li>
+                <li>Madeline now faces the right way if she interacts with <spoiler>Theo’s phone</spoiler> from the left side in Chapter 5</li>
+                <li>Fixed a crash in Chapter 5 if you die on a red crystal before the cutscene with Theo begins</li>
+                <li>Fixed soft-lock while talking in Chapter 8, if you transition back and forth between rooms before starting a conversation</li>
+                <li>Fixed bug where you could use joystick input to move Madeline during a <spoiler>Theo Crystal cutscene</spoiler> in Chapter 5</li>
+                <li>Fixed several frame-perfect crashes when skipping cutscenes</li>
+                <li>Save &amp; Quit is no longer available during the <spoiler>falling cutscene</spoiler> in Chapter 6</li>
+                <li>Can no longer Save &amp; Quit during the Epilogue cutscene</li>
+                <li>Fixed skipping <spoiler>Mr. Oshiro’s rooftop transformation cutscene</spoiler> on the first frame spawning you inside <spoiler>Angry Mr. Oshiro</spoiler></li>
+            </ul>
+            <h3>Level Fixes</h3>
+            <ul>
+                <li>Fixed camera trigger issues in Chapter 5</li>
+                <li>Fixed several screen transition soft lock bugs</li>
+                <li>Fixed several missing player spawn points, which caused the player to respawn in the wrong place on death if they entered rooms from unexpected places</li>
+                <li>Fixed several cases where you could be forced to restart from the previous checkpoint in Chapter 8</li>
+                <li>Fixed several cases where you could stand on the bottoms of levels where you should fall and die</li>
+                <li>Fixed several cases where you could see outside the bounds of the area during screen transitions</li>
+                <li>Fixed some weird background decal stuff</li>
+                <li>Some tiles in Chapter 2 did not appear correctly if entered from the right of the level</li>
+                <li>Fixed a case where selecting Retry or Save &amp; Quit in a Chapter 7 level spawned you inside a Lock Block</li>
+                <li>Fixed a wild bug involving pushing yourself through a one-way platform with a falling block into a buggy screen transition</li>
+            </ul>
+            <h3>Strawberry Seed Fixes</h3>
+            <ul>
+                <li>Fixed collection animation not cancelling the combine sound effect</li>
+                <li>Fixed seeds not using their ghostly sprite when you have collected them in a previous run</li>
+            </ul>
+            <h3><spoiler>Golden Strawberry</spoiler> Fixes</h3>
+            <ul>
+                <li>Fixed collecting a <spoiler>Golden Strawberry</spoiler> not always counting as a 0 death run in some specific levels (Chapter 6, <spoiler>Chapter 8-C</spoiler>)</li>
+                <li>Collecting the <spoiler>Golden Strawberry</spoiler> in Chapter 6 now appears properly in the Journal</li>
+                <li>Dying with a <spoiler>Golden Strawberry</spoiler> in Chapter 7 now resets the music properly</li>
+            </ul>
+            <h3>UI Fixes</h3>
+            <ul>
+                <li>In the Journal, Chapter 6 displays <spoiler>“1 / 0” for strawberries after you get the Golden Strawberry, instead of just “1”</spoiler></li>
+                <li>Fixed pressing confirm on the <spoiler>“PICO-8 unlocked!”</spoiler> message sometimes re-opening <spoiler>PICO-8</spoiler></li>
+                <li>Fixed Speedrun Timer incorrectly reporting a “best time” if you restart a chapter before the complete screen and complete it again.</li>
+                <li>Fixed Journal losing input functionality if you close it while moving a <spoiler>Crystal Heart poem entry</spoiler></li>
+            </ul>
+            <h3>Other Fixes</h3>
+            <ul>
+                <li>The <spoiler>falling cutscene</spoiler> in Chapter 6 no longer registers the <spoiler>Hollows</spoiler> checkpoint</li>
+                <li>Fixed clouds visually glitching if you pause while they are scaled up or down</li>
+                <li>Fixed a frame-perfect crash bug with the <spoiler>Sandwich Lava</spoiler> at the end of Chaper 8</li>
+                <li><spoiler>Bounce Blocks</spoiler> in Chapter 8 are no longer tagged as safe ground</li>
+                <li>Fixed a crash if you collected a <spoiler>Crystal Heart</spoiler> and your monitor was larger than 4096px</li>
+                <li>Fixed buffered dream-jumps automatically gaining full jump height, regardless of whether the player held the jump button</li>
+                <li>Fixed Madeline warping bug when she climb hops onto an Arrow Block at the same moment that it is destroyed</li>
+                <li>Fixed Madeline retaining the Bubble Booster state after being bounced out of a Bubble Booster</li>
+                <li>Fixed Madeline Bubble Boosters clipping Madeline through solids in some rare cases</li>
+                <li>Fixed bug where Celeste Mountain would not draw in the Overworld</li>
+                <li>Fixed a crash when activating the giant Crush Block from the left side</li>
+                <li>Restarting in the first room of the last checkpoint of Chapter 7 no longer sets the speedrun timer to 0 if you have hit other checkpoints</li>
+            </ul>
+            <h3>Console-Specific Fixes</h3>
+            <ul>
+                <li>[Switch] Fixed random crashes on Chapter Complete</li>
+                <li>[Switch] Fixed flickering with the northern lights and some reflections</li>
+                <li>[PS4] Fixed audio stuttering in Chapter 3 that eventually leads to a crash</li>
+                <li>[XBOX] Fixed a menu flickering bug</li>
+            </ul>
+
+            <br /><br />
+
+            <h1>V1.1.0.1</h1>
+            <h2>Initial Release</h2>
+            <br /><br />
+            <br /><br />
+        </div>
+
+        <span class="toggle" onclick="toggleSpoilers();">Toggle Spoilers</span>
+
+    </body>
+
+</html>
